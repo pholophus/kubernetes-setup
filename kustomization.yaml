@@ -1,9 +1,14 @@
 secretGenerator:
 - name: mysql-pass
   literals:
-  - password=YOUR_PASSWORD
+  - password=R@9jL#7Gz$4Tn&2W
 resources:
-  - storage-class.yaml
-  - pv.yaml
-  - wordpress-deployment.yaml
-  - wordpress-ingress.yaml
+  # - mysql/mysql-storage-class.yaml
+  - wordpress/wordpress-storage-class.yaml
+  # - mysql/pv-mysql.yaml
+  - wordpress/pv-wordpress.yaml
+  # - mysql/pvc-mysql.yaml
+  - wordpress/pvc-wordpress.yaml
+  # - mysql/mysql-deployment.yaml
+  - wordpress/wordpress-deployment.yaml
+  # - wordpress/wordpress-ingress.yaml

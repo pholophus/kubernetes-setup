@@ -2,6 +2,9 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: wordpress-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"  # Uncomment if you're using NGINX Ingress Controller
+    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
   - host: wordpress-testing.com
