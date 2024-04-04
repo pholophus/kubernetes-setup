@@ -1,7 +1,10 @@
 secretGenerator:
 - name: mysql-pass
   literals:
-  - password=R@9jL#7Gz$4Tn&2W
+  - password=password
+  - dbname=wordpress
+  - dbuser=twoq
+  - dbhost=192.168.100.117
 resources:
   # - mysql/mysql-storage-class.yaml
   - wordpress/wordpress-storage-class.yaml
@@ -9,6 +12,7 @@ resources:
   - wordpress/pv-wordpress.yaml
   # - mysql/pvc-mysql.yaml
   - wordpress/pvc-wordpress.yaml
+  # - wordpress/wordpress-config.yaml
   # - mysql/mysql-deployment.yaml
   - wordpress/wordpress-deployment.yaml
-  # - wordpress/wordpress-ingress.yaml
+  - wordpress/wordpress-ingress.yaml

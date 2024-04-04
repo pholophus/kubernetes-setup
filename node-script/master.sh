@@ -8,7 +8,11 @@ set -euxo pipefail
 
 PUBLIC_IP_ACCESS="false"
 NODENAME=$(hostname -s)
-POD_CIDR="192.168.0.0/16"
+
+#CALICO CIDR CONFIGURATION
+
+#FLANNER CIDR CONFIGURATION
+POD_CIDR="10.244.0.0/16"
 
 # Pull required images
 
@@ -37,6 +41,9 @@ mkdir -p "$HOME"/.kube
 sudo cp -i /etc/kubernetes/admin.conf "$HOME"/.kube/config
 sudo chown "$(id -u)":"$(id -g)" "$HOME"/.kube/config
 
-# Install Claico Network Plugin Network 
+# Install Calico network plugin
 
-kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
+
+# Install Flannel network plugin
+kubectl apply -f https://github.com/coreos/flannel/raw/master/Documentation/kube-flannel.yml
+
