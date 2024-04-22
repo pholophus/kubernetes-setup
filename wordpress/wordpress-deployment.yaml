@@ -10,7 +10,7 @@ spec:
   selector:
     app: wordpress
     tier: frontend
-  type: LoadBalancer
+  # type: LoadBalancer
 
 ---
 apiVersion: apps/v1
@@ -20,6 +20,7 @@ metadata:
   labels:
     app: wordpress
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: wordpress
@@ -33,20 +34,29 @@ spec:
         tier: frontend
     spec:
       containers:
-      - image: wordpress:latest  # Update image tag to 'latest'
+      - image: wordpress:6.2.1-apache
         name: wordpress
         env:
         - name: WORDPRESS_DB_HOST
-          value: 10.20.50.84
+          valueFrom:
+            secretKeyRef:
+              name: mysql-pass
+              key: dbhost
         - name: WORDPRESS_DB_PASSWORD
           valueFrom:
             secretKeyRef:
               name: mysql-pass
               key: password
         - name: WORDPRESS_DB_USER
-          value: ppm-staging
+          valueFrom:
+            secretKeyRef:
+              name: mysql-pass
+              key: dbuser
         - name: WORDPRESS_DB_NAME
-          value: wordpress
+          valueFrom:
+            secretKeyRef:
+              name: mysql-pass
+              key: dbname
         ports:
         - containerPort: 80
           name: wordpress
