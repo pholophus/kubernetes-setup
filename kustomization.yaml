@@ -1,14 +1,32 @@
+# secretGenerator:
+# - name: mysql-pass
+#   literals:
+#   - password=R@9jL#7Gz$4Tn&2W
+# resources:
+#   # - mysql/mysql-storage-class.yaml
+#   - wordpress/wordpress-storage-class.yaml
+#   # - mysql/pv-mysql.yaml
+#   - wordpress/pv-wordpress.yaml
+#   # - mysql/pvc-mysql.yaml
+#   - wordpress/pvc-wordpress.yaml
+#   # - mysql/mysql-deployment.yaml
+#   - wordpress/wordpress-deployment.yaml
+#   # - wordpress/wordpress-ingress.yaml
+
 secretGenerator:
-- name: mysql-pass
+- name: wordpress-secret
   literals:
-  - password=R@9jL#7Gz$4Tn&2W
+  # - password=password
+  # - dbname=wordpress
+  # - dbuser=twoq
+  # - dbhost=192.168.100.117
+  - password=D$5mY!9Pz#8Qs@6E
+  - dbname=wordpress
+  - dbuser=ppm-staging
+  - dbhost=10.20.50.84
 resources:
-  # - mysql/mysql-storage-class.yaml
   - wordpress/wordpress-storage-class.yaml
-  # - mysql/pv-mysql.yaml
   - wordpress/pv-wordpress.yaml
-  # - mysql/pvc-mysql.yaml
   - wordpress/pvc-wordpress.yaml
-  # - mysql/mysql-deployment.yaml
   - wordpress/wordpress-deployment.yaml
-  # - wordpress/wordpress-ingress.yaml
+  - wordpress/wordpress-ingress.yaml
