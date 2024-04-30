@@ -6,7 +6,7 @@ metadata:
     kubernetes.io/ingress.class: "nginx"  # Uncomment if you're using NGINX Ingress Controller
 spec:
   rules:
-  - host: wordpress4-testing-staging.com
+  - host: wordpress4-testing-development.com
     http:
       paths:
       - path: "/"

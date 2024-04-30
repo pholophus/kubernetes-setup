@@ -1,13 +1,19 @@
 secretGenerator:
 - name: wordpress-secret
   literals:
-  - password=D$5mY!9Pz#8Qs@6E
-  - dbname=wordpress
-  - dbuser=ppm-staging
-  - dbhost=10.20.50.84
+  # - password=password
+  # - dbname=wordpress
+  # - dbuser=twoq
+  # - dbhost=192.168.100.117
+  - password=Jopeyuh-94
+  - dbname=wp_pmo_pendrive_for_new
+  - dbuser=ppm
+  - dbhost=45.127.5.137
 resources:
   - wordpress/wordpress-storage-class.yaml
   - wordpress/pv-wordpress.yaml
   - wordpress/pvc-wordpress.yaml
   - wordpress/wordpress-deployment.yaml
   - wordpress/wordpress-ingress.yaml
+
+
