@@ -72,7 +72,7 @@ sudo apt-mark hold kubelet kubeadm kubectl
 
 sudo apt-get install -y jq
 
-local_ip="$(ip --json addr show enp0s3 | jq -r '.[0].addr_info[] | select(.family == "inet") | .local')"
+local_ip="$(ip --json addr show ens160 | jq -r '.[0].addr_info[] | select(.family == "inet") | .local')"
 sudo nano /etc/default/kubelet << EOF
 KUBELET_EXTRA_ARGS=--node-ip=$local_ip
 EOF

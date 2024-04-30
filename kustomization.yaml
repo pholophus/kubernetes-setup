@@ -1,18 +1,13 @@
 secretGenerator:
-- name: mysql-pass
+- name: wordpress-secret
   literals:
-  - password=password
+  - password=D#9v@Gp6Rt$zQ3jW
   - dbname=wordpress
-  - dbuser=twoq
-  - dbhost=192.168.100.117
+  - dbuser=ppm-wordpress
+  - dbhost=10.20.50.95
 resources:
-  # - mysql/mysql-storage-class.yaml
   - wordpress/wordpress-storage-class.yaml
-  # - mysql/pv-mysql.yaml
   - wordpress/pv-wordpress.yaml
-  # - mysql/pvc-mysql.yaml
   - wordpress/pvc-wordpress.yaml
-  # - wordpress/wordpress-config.yaml
-  # - mysql/mysql-deployment.yaml
   - wordpress/wordpress-deployment.yaml
   - wordpress/wordpress-ingress.yaml

@@ -20,7 +20,6 @@ metadata:
   labels:
     app: wordpress
 spec:
-  replicas: 1
   selector:
     matchLabels:
       app: wordpress
@@ -33,47 +32,47 @@ spec:
         app: wordpress
         tier: frontend
     spec:
-      # Add node affinity rule to ignore 'webt1'
-      # affinity:
-      #   nodeAffinity:
-      #     requiredDuringSchedulingIgnoredDuringExecution:
-      #       nodeSelectorTerms:
-      #       - matchExpressions:
-      #         - key: kubernetes.io/hostname
-      #           operator: NotIn
-      #           values:
-      #           - webt1
       containers:
+      # - image: pholophus/my-wordpress-image:latest
       - image: wordpress:6.2.1-apache
         name: wordpress
         env:
         - name: WORDPRESS_DB_HOST
           valueFrom:
             secretKeyRef:
-              name: mysql-pass
+              name: wordpress-secret
               key: dbhost
         - name: WORDPRESS_DB_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: mysql-pass
+              name: wordpress-secret
               key: password
         - name: WORDPRESS_DB_USER
           valueFrom:
             secretKeyRef:
-              name: mysql-pass
+              name: wordpress-secret
               key: dbuser
         - name: WORDPRESS_DB_NAME
           valueFrom:
             secretKeyRef:
-              name: mysql-pass
+              name: wordpress-secret
               key: dbname
+        - name: WORDPRESS_TABLE_PREFIX
+          value: pmo_
         ports:
         - containerPort: 80
           name: wordpress
+        # volumeMounts:
+        # - name: wordpress-persistent-storage  # Update to match volume name
+        #   mountPath: /var/www/html
         volumeMounts:
-        - name: wordpress-persistent-storage  # Update to match volume name
-          mountPath: /var/www/html
+        - name: wordpress-persistent-storage
+          mountPath: /var/www/html/wp-content
+      # volumes:
+      # - name: wordpress-persistent-storage  # Keep volume name consistent
+      #   persistentVolumeClaim:
+      #     claimName: wp-pv-claim
       volumes:
-      - name: wordpress-persistent-storage  # Keep volume name consistent
+      - name: wordpress-persistent-storage
         persistentVolumeClaim:
-          claimName: wp-pv-claim
+          claimName: nfs-pvc
